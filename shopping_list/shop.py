@@ -2,6 +2,7 @@ import sys
 from storage import load_list, save_list
 from utils import calc_line_total, calc_grand_total, count_units
 
+
 def add_item(name, qty, price):
     items = load_list()
 
@@ -9,11 +10,11 @@ def add_item(name, qty, price):
         qty = int(qty)
         price = float(price)
 
-        if qty <=0 or price < 0:
+        if qty <= 0 or price < 0:
             raise ValueError
-    
+
     except ValueError:
-        print("X Daudzumam jābūt pozitīvam veselam skaitlim un cenai jābūt skaitlim.")
+        print("❌ Daudzumam jābūt pozitīvam veselam skaitlim un cenai jābūt skaitlim.")
         return
 
     item = {
@@ -28,6 +29,7 @@ def add_item(name, qty, price):
     total = calc_line_total(item)
 
     print(f"✓ Pievienots: {name} × {qty} ({price:.2f} EUR/gab.) = {total:.2f} EUR")
+
 
 def list_items():
     items = load_list()
@@ -46,6 +48,7 @@ def list_items():
             f"{item['price']:.2f} EUR/gab. — {line_total:.2f} EUR"
         )
 
+
 def total_items():
     items = load_list()
 
@@ -55,9 +58,11 @@ def total_items():
 
     print(f"Kopā: {grand_total:.2f} EUR ({units} vienības, {products} produkti)")
 
+
 def clear_items():
     save_list([])
     print("✓ Saraksts notīrīts")
+
 
 def main():
     if len(sys.argv) < 2:
@@ -67,7 +72,7 @@ def main():
     command = sys.argv[1]
 
     if command == "add":
-        if len(sys.argv) != 4:
+        if len(sys.argv) != 5:
             print("Lietošana: python shop.py add Produkts Daudzums Cena")
             return
 
